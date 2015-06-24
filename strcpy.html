@@ -1,0 +1,77 @@
+<html><head><title>strcpy</title>
+<style type="text/css">
+td {
+    width: 22px;
+    font-size: 20px;
+}
+</style></head><body>
+<h1>char *<a href="https://www.freebsd.org/cgi/man.cgi?query=strcpy" target="_blank">strcpy</a>(char * dst, const char *src)</h1>
+
+<div>
+<div id="A" style="height: 120px;"></div>
+<div id="B" style="height: 80px;"></div>
+</div>
+<h3><a href="http://www.zbyzbyzby.com">by ZBY</a></h3>
+<br>
+<br>
+notice:<br>
+this domain is for sale, if you want to buy this domain, <br>
+please contact this email.<br>
+<a href="email.png"><img src="email.png" style="height: 30px;"></a>
+<br>
+<script>
+var x = 0, y = 0, tid;
+function overflow()
+{
+    var t = "";
+    var s = "HelloWorld";
+    var i;
+    x = -1;
+    y++;
+    if (y > 4096) return;
+    t += "<table border='1'>";
+    t += "<tr>";
+    for (i = 0; i < y; i++) {
+        t += "<td>" + s.substr(i % s.length, 1) + "</td>";
+        if ((i + 1) % 16 == 0) t += "</tr><tr>";
+    }
+    t += "</tr>";
+    t += "<tr>";
+    document.getElementById("A").innerHTML = t;
+    document.getElementById("B").innerHTML = "";
+    setTimeout("overflow()", 50);
+}
+function replay() { clearTimeout(tid); x = 0; show(); }
+function show() {
+    var t = "";
+    var s = "HelloWorld";
+    var i, j;
+    if (x < 0) return;
+    t += "<table border='1'>";
+    t += "<tr>";
+    for (i = 0; i < 1; i++)
+        for (j = 0; j < s.length; j++)
+            t += "<td>" + s.substr(j, 1) + "</td>";
+    t += "<td>\\0</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>";
+    t += "<tr>";
+    for (i = 0; i < 11; i++)
+        if (i != x) t += "<td>&nbsp;</td>";
+        else t += "<td>^</td>";
+    t += "</tr>";
+    t += "<tr>";
+    for (i = 0; i < 11; i++)
+        if (i < x) t += "<td>" + s.substr(i % s.length, 1) + "</td>";
+        else if (x != 10) t += "<td>?</td>";
+        else t += "<td>\\0</td>";
+    t += "</tr>";
+    document.getElementById("A").innerHTML = t;
+    x++;
+    if (x < i) tid = setTimeout("show()", 800);
+}
+
+
+show();
+document.getElementById("B").innerHTML = "<h3><a href='javascript:replay()'>replay</a>&nbsp;&nbsp;<a href='javascript:overflow();'>overflow</a></h3>";
+</script>
+</table>
+</body></html>
